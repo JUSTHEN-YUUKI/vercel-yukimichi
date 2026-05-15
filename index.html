@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YUKIMICHI – SNOWPATH JAPAN | Japan Export Support</title>
+  <meta name="description" content="Legal and compliant export support from Japan. AI-powered quotation, chatbot assistance, and trusted Japan-to-world trading.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d1f3c;
+      --navy-light: #162d52;
+      --navy-dark: #081526;
+      --washi: #f5f0e8;
+      --washi-dark: #ede6d6;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --bengara: #8b2500;
+      --bengara-light: #a83010;
+      --tin: #8a9aab;
+      --white: #ffffff;
+      --text-dark: #0d1f3c;
+      --text-mid: #4a5568;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Montserrat', sans-serif;
+      background: var(--navy-dark);
+      color: var(--washi);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(8, 21, 38, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .logo span { display: block; font-size: 0.65rem; font-weight: 300; letter-spacing: 0.2em; color: var(--tin); font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--washi); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 400; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--bengara); color: var(--white);
+      padding: 0.6rem 1.4rem; border-radius: 2px;
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif; font-weight: 500;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--bengara-light); }
+
+    /* ── PAGE SECTIONS ── */
+    .page { display: none; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 50%, #1a3a5c 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      padding: 6rem 3rem 4rem;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; max-width: 680px; }
+    .hero-tag {
+      display: inline-block; margin-bottom: 1.5rem;
+      font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.4rem 1rem; border-radius: 1px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 600; line-height: 1.15;
+      color: var(--washi); margin-bottom: 0.5rem;
+    }
+    h1 .jp { display: block; font-size: 0.5em; font-weight: 400; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.2em; font-style: italic; }
+    .hero-sub {
+      font-size: 1rem; color: var(--tin); line-height: 1.8;
+      margin: 1.5rem 0 2.5rem; max-width: 500px;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--bengara); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+      border: none; cursor: pointer; transition: background 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--bengara-light); }
+    .btn-secondary {
+      background: transparent; color: var(--gold);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+      border: 1px solid rgba(201,168,76,0.5); cursor: pointer; transition: all 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+    .hero-badges {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      padding-top: 2.5rem; border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .badge { text-align: center; }
+    .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); display: block; }
+    .badge-label { font-size: 0.7rem; color: var(--tin); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .hero-right {
+      position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+      width: 380px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 3rem; }
+    .section-tag {
+      font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem; display: block;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 600;
+      color: var(--washi); line-height: 1.2; margin-bottom: 1.5rem;
+    }
+    h2 .gold { color: var(--gold); }
+    .section-lead { font-size: 1rem; color: var(--tin); line-height: 1.8; max-width: 580px; margin-bottom: 3rem; }
+
+    /* ── FEATURES ── */
+    #features { background: var(--navy); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      padding: 2.5rem; border: 1px solid rgba(201,168,76,0.08);
+      position: relative; overflow: hidden; transition: all 0.3s;
+    }
+    .feature-card:hover { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.2); }
+    .feature-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+    .feature-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 0.8rem; }
+    .feature-card p { font-size: 0.85rem; color: var(--tin); line-height: 1.7; }
+    .feature-card .jp-label { font-size: 0.72rem; color: rgba(201,168,76,0.6); display: block; margin-top: 0.4rem; }
+
+    /* ── PRICING PREVIEW ── */
+    #pricing-preview { background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 100%); }
+    .pricing-table {
+      width: 100%; border-collapse: collapse; margin-top: 2rem;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+    .pricing-table th {
+      background: rgba(201,168,76,0.12); color: var(--gold);
+      padding: 1rem 1.5rem; text-align: left;
+      font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .pricing-table td {
+      padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.88rem; color: var(--washi); vertical-align: top;
+    }
+    .pricing-table tr:hover td { background: rgba(201,168,76,0.04); }
+    .free-badge {
+      display: inline-block; background: var(--bengara);
+      color: var(--white); font-size: 0.68rem; padding: 0.2rem 0.6rem;
+      border-radius: 1px; letter-spacing: 0.08em; font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ── QUOTE CALCULATOR ── */
+    #calculator { background: var(--navy-dark); }
+    .calc-wrapper {
+      max-width: 800px; margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem;
+    }
+    .calc-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); font-family: 'Montserrat', sans-serif;
+    }
+    .form-group label .jp { color: var(--tin); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: none; margin-left: 0.5rem; }
+    .form-group select, .form-group input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.2); color: var(--washi);
+      padding: 0.85rem 1rem; font-size: 0.88rem; font-family: 'Noto Sans JP', sans-serif;
+      outline: none; transition: border-color 0.2s; border-radius: 1px;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-group select:focus, .form-group input:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--navy); }
+
+    .calc-result {
+      margin-top: 2rem; padding: 2rem;
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.3);
+      display: none;
+    }
+    .calc-result.show { display: block; }
+    .result-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 1.5rem; }
+    .result-line { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.88rem; }
+    .result-line:last-child { border: none; padding-top: 1rem; font-weight: 600; color: var(--gold); font-size: 1rem; }
+    .result-note { margin-top: 1rem; font-size: 0.75rem; color: var(--tin); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+    .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 1.5rem; }
+    .contact-info p { font-size: 0.85rem; color: var(--tin); line-height: 1.8; margin-bottom: 1.2rem; }
+    .contact-lang {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0;
+    }
+    .lang-tag {
+      border: 1px solid rgba(201,168,76,0.3); color: var(--gold);
+      padding: 0.3rem 0.8rem; font-size: 0.72rem; letter-spacing: 0.08em;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-form input, .contact-form select, .contact-form textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.15); color: var(--washi);
+      padding: 0.9rem 1.2rem; font-size: 0.88rem; font-family: 'Noto Sans JP', sans-serif;
+      outline: none; transition: border-color 0.2s; border-radius: 1px; width: 100%;
+    }
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .contact-form select option { background: var(--navy); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .input-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-family: 'Montserrat', sans-serif; margin-bottom: 0.3rem; display: block; }
+    .input-label .jp { text-transform: none; color: var(--tin); letter-spacing: 0.04em; }
+    .compliance-note { font-size: 0.72rem; color: var(--tin); line-height: 1.6; padding: 1rem; border-left: 2px solid rgba(201,168,76,0.3); margin-top: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 3rem; text-align: center;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .footer-sub { font-size: 0.72rem; color: var(--tin); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--tin); font-size: 0.78rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-legal { font-size: 0.7rem; color: rgba(138,154,171,0.6); line-height: 1.8; }
+
+    /* ── AI CHAT WIDGET ── */
+    #chat-btn {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: var(--bengara); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(139,37,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 1.5rem;
+    }
+    #chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 30px rgba(139,37,0,0.5); }
+    .chat-pulse {
+      position: absolute; top: -2px; right: -2px;
+      width: 14px; height: 14px; background: var(--gold);
+      border-radius: 50%; animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    #chat-window {
+      position: fixed; bottom: 5.5rem; right: 2rem; z-index: 998;
+      width: 380px; max-height: 540px;
+      background: var(--navy); border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px; overflow: hidden;
+      display: none; flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    #chat-window.open { display: flex; }
+    .chat-header {
+      background: rgba(201,168,76,0.12); padding: 1rem 1.3rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .chat-avatar {
+      width: 36px; height: 36px; background: var(--bengara);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .chat-header-info { flex: 1; }
+    .chat-header-info strong { font-size: 0.85rem; color: var(--gold); display: block; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+    .chat-header-info span { font-size: 0.7rem; color: var(--tin); }
+    .chat-close { background: none; border: none; color: var(--tin); cursor: pointer; font-size: 1.1rem; padding: 0.2rem; }
+    .chat-close:hover { color: var(--washi); }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem;
+      scrollbar-width: thin; scrollbar-color: rgba(201,168,76,0.2) transparent;
+    }
+    .msg { max-width: 88%; }
+    .msg.bot { align-self: flex-start; }
+    .msg.user { align-self: flex-end; }
+    .msg-bubble {
+      padding: 0.8rem 1rem; border-radius: 2px;
+      font-size: 0.82rem; line-height: 1.6;
+    }
+    .msg.bot .msg-bubble { background: rgba(255,255,255,0.06); color: var(--washi); border-left: 2px solid var(--gold); }
+    .msg.user .msg-bubble { background: var(--bengara); color: var(--white); }
+    .msg-time { font-size: 0.65rem; color: var(--tin); margin-top: 0.3rem; }
+    .msg.user .msg-time { text-align: right; }
+
+    .chat-input-area {
+      padding: 1rem; border-top: 1px solid rgba(201,168,76,0.1);
+      display: flex; gap: 0.6rem; align-items: flex-end;
+    }
+    #chat-input {
+      flex: 1; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.2); color: var(--washi);
+      padding: 0.7rem 0.9rem; font-size: 0.82rem; font-family: 'Noto Sans JP', sans-serif;
+      outline: none; border-radius: 2px; resize: none; height: 42px;
+      transition: border-color 0.2s;
+    }
+    #chat-input:focus { border-color: var(--gold); }
+    #chat-send {
+      background: var(--bengara); border: none; color: var(--white);
+      width: 42px; height: 42px; border-radius: 2px; cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    #chat-send:hover { background: var(--bengara-light); }
+    .chat-lang-note { font-size: 0.68rem; color: var(--tin); text-align: center; padding: 0.5rem; border-top: 1px solid rgba(255,255,255,0.04); }
+
+    .typing-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); animation: typing 1.2s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 6rem 1.5rem 4rem; }
+      .hero-right { display: none; }
+      .hero-badges { gap: 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .calc-form { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      #chat-window { width: calc(100vw - 2rem); right: 1rem; bottom: 5rem; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none; background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3); padding: 1.2rem;
+      color: var(--gold); font-size: 0.88rem; text-align: center; margin-top: 1rem;
+    }
+    .success-msg.show { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" onclick="scrollTo(0,0)">
+    YUKIMICHI
+    <span>SNOWPATH JAPAN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features" onclick="smoothScroll('features')">Services</a></li>
+    <li><a href="#calculator" onclick="smoothScroll('calculator')">Quote</a></li>
+    <li><a href="#pricing-preview" onclick="smoothScroll('pricing-preview')">Pricing</a></li>
+    <li><a href="#contact" onclick="smoothScroll('contact')">Contact</a></li>
+  </ul>
+  <a href="#contact" onclick="smoothScroll('contact')" class="nav-cta">Get a Quote / お見積り</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag fade-up">JUSTHEN Co., Ltd. — Japan Export Support</div>
+    <h1 class="fade-up delay-1">
+      <span class="jp">日本から、世界へ</span>
+      Delivering Trust<br>from Japan
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Legal, compliant, and reliable export support from Japan — powered by AI.<br>
+      日本限定商品を、世界中へ誠実に届けます。
+    </p>
+    <div class="hero-actions fade-up delay-3">
+      <button class="btn-primary" onclick="smoothScroll('calculator')">🧮 Get Instant Quote / 即時見積り</button>
+      <button class="btn-secondary" onclick="openChat()">🤖 Ask AI / AIに質問する</button>
+    </div>
+    <div class="hero-badges fade-up delay-3">
+      <div class="badge"><span class="badge-num">1st Mo.</span><span class="badge-label">Fee Free / 初回無料</span></div>
+      <div class="badge"><span class="badge-num">4</span><span class="badge-label">Languages / 対応言語</span></div>
+      <div class="badge"><span class="badge-num">24h</span><span class="badge-label">Reply Time / 返信目安</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <span class="section-tag">Our Services / サービス内容</span>
+  <h2>Everything You Need<br><span class="gold">from Japan to the World</span></h2>
+  <p class="section-lead">From sourcing to international shipment — we handle every step with full legal compliance.<br>
+  <small style="font-size:0.8em;color:var(--tin)">調達から国際発送まで、すべて法令遵守で対応します。</small></p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📦</span>
+      <h3>Product Sourcing</h3>
+      <p>Japan-exclusive, limited, and hard-to-find items sourced legally from domestic markets.</p>
+      <span class="jp-label">日本限定・入手困難商品の正規調達</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚢</span>
+      <h3>International Shipping</h3>
+      <p>EMS / DHL / FedEx / UPS / Yamato International — best route selected for your needs.</p>
+      <span class="jp-label">EMS・DHL・FedEx・UPS・ヤマト国際宅急便 対応</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📋</span>
+      <h3>Customs Documentation</h3>
+      <p>Invoice, packing list, HS code guidance, and full export compliance documentation.</p>
+      <span class="jp-label">通関書類・HSコード・輸出コンプライアンス対応</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🛡️</span>
+      <h3>Shipping Insurance</h3>
+      <p>Optional cargo insurance available for all shipments. Strongly recommended for high-value items.</p>
+      <span class="jp-label">任意輸送保険・高額商品には強く推奨</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <h3>AI Export Consultant</h3>
+      <p>Our AI chatbot answers your questions in English, Japanese, Chinese, and Spanish — instantly.</p>
+      <span class="jp-label">英語・日本語・中国語・スペイン語対応AIアシスタント</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🏪</span>
+      <h3>Drug Store & OTC Products</h3>
+      <p>Japanese drugstore quasi-drugs, skincare, and OTC health products — with regulatory pre-check.</p>
+      <span class="jp-label">ドラッグストアなどの医薬部外品・規制事前確認付き</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🃏</span>
+      <h3>Trading Cards & Collectibles</h3>
+      <p>Japanese trading cards, anime figures, limited merchandise — authentic and carefully packaged.</p>
+      <span class="jp-label">トレーディングカード・フィギュア・限定グッズ</span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✏️</span>
+      <h3>Full Customization</h3>
+      <p>Packaging, quantity, schedule, and destination — flexibly customized to your requirements.</p>
+      <span class="jp-label">梱包・数量・発送スケジュール・柔軟カスタマイズ</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section id="pricing-preview">
+  <span class="section-tag">Pricing / 料金体系</span>
+  <h2>Transparent Fees,<br><span class="gold">No Hidden Costs</span></h2>
+  <p class="section-lead">First month handling fee is FREE. Thereafter, fees depend on shipping method.<br>
+  <small style="font-size:0.8em;color:var(--tin)">初回1ヶ月手配手数料無料。2ヶ月目以降は輸送方法に応じた手数料。</small></p>
+
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th>Shipping Method / 輸送方法</th>
+        <th>Carrier / 配送会社</th>
+        <th>Handling Fee / 手配手数料</th>
+        <th>Min. Fee / 最低手数料</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <strong>International Express</strong><br>
+          <small style="color:var(--tin)">国際エクスプレス</small><br>
+          <small style="color:rgba(201,168,76,0.7);font-size:0.75em">EMS / DHL / FedEx / UPS / Yamato International<br>EMS・DHL・FedEx・UPS・ヤマト国際宅急便</small>
+        </td>
+        <td>EMS, DHL, FedEx, UPS, Yamato</td>
+        <td>15% of product value</td>
+        <td>¥10,000 / order</td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Air Cargo</strong><br>
+          <small style="color:var(--tin)">航空貨物</small>
+        </td>
+        <td>Freight Forwarder</td>
+        <td>10% of product value</td>
+        <td>¥30,000 / shipment</td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Sea Container (FCL)</strong><br>
+          <small style="color:var(--tin)">海上コンテナ（フルコンテナ）</small>
+        </td>
+        <td>Ocean Freight</td>
+        <td>7% of product value</td>
+        <td>¥50,000 / shipment</td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Sea Container (LCL)</strong><br>
+          <small style="color:var(--tin)">海上コンテナ（混載）</small>
+        </td>
+        <td>Ocean Freight</td>
+        <td>7% of product value</td>
+        <td>¥30,000 / shipment</td>
+      </tr>
+      <tr>
+        <td colspan="2"><strong>Initial Consultation / 初期相談</strong></td>
+        <td><span class="free-badge">FREE / 無料</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td colspan="2"><strong>First Month Handling Fee / 初回1ヶ月手配手数料</strong></td>
+        <td><span class="free-badge">FREE / 無料</span></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:3rem;padding:2rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1.2rem;">💳 Payment Methods / お支払い方法</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;">
+      <div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--washi);margin-bottom:0.5rem;">🏦 Bank Transfer / 銀行振込</p>
+        <p style="font-size:0.78rem;color:var(--tin);line-height:1.7;">三井住友銀行 光ヶ丘支店 288<br>普通 1054339<br>カ)ジャッセン (JUSTHEN CO., LTD.)</p>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--washi);margin-bottom:0.5rem;">⚡ Wise <small style="color:var(--gold)">(Recommended / 推奨)</small></p>
+        <p style="font-size:0.78rem;color:var(--tin);line-height:1.7;">Fast international transfer.<br>Low fees. Details provided after quotation.<br>低手数料・迅速な国際送金</p>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--washi);margin-bottom:0.5rem;">💳 PayPal / International Wire</p>
+        <p style="font-size:0.78rem;color:var(--tin);line-height:1.7;">Available upon request.<br>Transaction fees apply to sender.<br>送金手数料は送金者負担</p>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--washi);margin-bottom:0.5rem;">📋 Payment Terms / 支払条件</p>
+        <p style="font-size:0.78rem;color:var(--tin);line-height:1.7;">Full advance payment required before export begins.<br>JPY or USD accepted.<br>事前入金制・円またはドル対応</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE CALCULATOR -->
+<section id="calculator">
+  <span class="section-tag">Instant Quote / 即時見積り</span>
+  <h2>Calculate Your<br><span class="gold">Export Cost</span></h2>
+  <p class="section-lead">Get an estimated cost in seconds. All figures are estimates — a detailed official quotation will be issued upon inquiry.<br>
+  <small style="font-size:0.8em;color:var(--tin)">概算費用を数秒で確認できます。正式見積は問い合わせ後に発行します。</small></p>
+
+  <div class="calc-wrapper">
+    <div class="calc-form">
+      <div class="form-group">
+        <label>Shipping Method <span class="jp">輸送方法</span></label>
+        <select id="calc-method" onchange="calcQuote()">
+          <option value="">Select / 選択してください</option>
+          <option value="express">International Express (EMS/DHL/FedEx/UPS/Yamato) — 15%</option>
+          <option value="air">Air Cargo 航空貨物 — 10%</option>
+          <option value="fcl">Sea FCL 海上フルコンテナ — 7%</option>
+          <option value="lcl">Sea LCL 海上混載 — 7%</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Destination Region <span class="jp">送付先地域</span></label>
+        <select id="calc-region" onchange="calcQuote()">
+          <option value="">Select / 選択</option>
+          <option value="us">North America 北米 (US/Canada)</option>
+          <option value="eu">Europe 欧州 (EU/UK)</option>
+          <option value="sea">Southeast Asia 東南アジア</option>
+          <option value="me">Middle East 中東</option>
+          <option value="au">Australia/Oceania オセアニア</option>
+          <option value="other">Other その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Product Value <span class="jp">商品代金 (JPY)</span></label>
+        <input type="number" id="calc-value" placeholder="e.g. 50000" oninput="calcQuote()" min="0">
+      </div>
+      <div class="form-group">
+        <label>Approx. Weight <span class="jp">概算重量 (kg)</span></label>
+        <input type="number" id="calc-weight" placeholder="e.g. 2" oninput="calcQuote()" min="0" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Insurance <span class="jp">輸送保険</span></label>
+        <select id="calc-insurance" onchange="calcQuote()">
+          <option value="no">No Insurance / 保険なし</option>
+          <option value="yes">With Insurance / 保険あり</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>First Month? <span class="jp">初回1ヶ月？</span></label>
+        <select id="calc-first" onchange="calcQuote()">
+          <option value="yes">Yes — Fee Waived / はい（手数料無料）</option>
+          <option value="no">No — From Month 2 / いいえ（2ヶ月目以降）</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calc-result" id="calc-result">
+      <div class="result-title">📊 Estimated Cost Breakdown / 概算費用内訳</div>
+      <div class="result-line"><span>Product Cost / 商品代金</span><span id="r-product">—</span></div>
+      <div class="result-line"><span>Handling Fee / 手配手数料</span><span id="r-fee">—</span></div>
+      <div class="result-line"><span>Est. Shipping / 概算送料</span><span id="r-ship">—</span></div>
+      <div class="result-line"><span>Insurance / 保険料（目安）</span><span id="r-ins">—</span></div>
+      <div class="result-line"><span>Import Duties & Taxes / 関税・税金</span><span id="r-duty">Paid by recipient / 受取人負担</span></div>
+      <div class="result-line"><span>💰 ESTIMATED TOTAL / 概算合計</span><span id="r-total">—</span></div>
+      <p class="result-note">⚠️ This is an estimate only. Actual shipping cost, customs duties, and taxes are determined at time of shipment and by destination customs.<br>※ これは概算です。実際の送料・関税・税金は発送時および現地税関の判断によります。</p>
+      <button class="btn-primary" style="margin-top:1.5rem;width:100%;" onclick="smoothScroll('contact')">
+        📩 Request Official Quote / 正式見積を依頼する
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-tag">Contact Us / お問い合わせ</span>
+  <h2>Get in Touch<br><span class="gold">Contact Us</span></h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>We Respond in 24–48 Hours</h3>
+      <p>通常24〜48時間以内にご返信いたします。</p>
+      <p style="font-size:0.82rem;color:var(--tin);line-height:1.8;">
+        We respond in multiple languages — just write in your preferred language.<br>
+        お気軽にご希望の言語でご連絡ください。
+      </p>
+      <div class="contact-lang">
+        <span class="lang-tag">🇬🇧 English</span>
+        <span class="lang-tag">🇯🇵 日本語</span>
+        <span class="lang-tag">🇨🇳 中文</span>
+        <span class="lang-tag">🇪🇸 Español</span>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <p style="font-size:0.78rem;color:var(--tin);margin-bottom:0.8rem;">JUSTHEN CO., LTD. / 株式会社ジャッセン</p>
+        <p style="font-size:0.78rem;color:var(--tin);">古物商許可証 第305581606050号<br>東京都公安委員会</p>
+      </div>
+      <button class="btn-secondary" style="margin-top:2rem;" onclick="openChat()">🤖 Chat with AI First / まずAIに質問する</button>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div>
+            <label class="input-label">Full Name <span class="jp">/ お名前</span></label>
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div>
+            <label class="input-label">Company / Website URL <span class="jp">（任意）</span></label>
+            <input type="text" placeholder="Optional">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="input-label">Country / Region <span class="jp">/ お届け先の国・地域</span></label>
+            <select required>
+              <option value="">Select Country / 選択</option>
+              <option>United States</option><option>United Kingdom</option>
+              <option>Germany</option><option>France</option><option>Australia</option>
+              <option>Canada</option><option>UAE</option><option>Saudi Arabia</option>
+              <option>Thailand</option><option>Singapore</option><option>Indonesia</option>
+              <option>Malaysia</option><option>Philippines</option><option>Vietnam</option>
+              <option>China</option><option>Taiwan</option><option>South Korea</option>
+              <option>India</option><option>Brazil</option><option>Mexico</option>
+              <option>Other / その他</option>
+            </select>
+          </div>
+          <div>
+            <label class="input-label">Email Address <span class="jp">/ メールアドレス</span></label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div>
+          <label class="input-label">Products of Interest <span class="jp">/ ご希望の商品</span></label>
+          <textarea placeholder="Please describe the products you'd like to source from Japan. / ご希望の商品をお知らせください。&#10;&#10;e.g. Japanese skincare, trading cards, limited snacks, anime figures..."></textarea>
+        </div>
+        <div>
+          <label class="input-label">Message <span class="jp">/ メッセージ</span></label>
+          <textarea placeholder="Any additional information, budget range, quantity, or special requests...&#10;その他ご要望・予算・数量など"></textarea>
+        </div>
+        <div>
+          <label class="input-label">Attachment <span class="jp">/ 添付ファイル（任意）</span></label>
+          <input type="file" style="padding:0.6rem;color:var(--tin);font-size:0.78rem;">
+        </div>
+        <div class="compliance-note">
+          Import/export eligibility depends on local regulations. We will confirm in advance.<br>
+          輸出入の可否は現地法令により異なります。事前にご確認の上ご案内します。
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;padding:1rem;">
+          Send Inquiry / 送信する →
+        </button>
+        <div class="success-msg" id="contact-success">
+          ✅ Thank you! We'll reply within 24–48 business hours.<br>
+          お問い合わせありがとうございます。24〜48時間以内にご返信します。
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">YUKIMICHI</div>
+  <div class="footer-sub">SNOWPATH JAPAN — Delivering Trust from Japan</div>
+  <div class="footer-links">
+    <a href="#" onclick="smoothScroll('features')">Services</a>
+    <a href="#" onclick="smoothScroll('calculator')">Quote Calculator</a>
+    <a href="#" onclick="smoothScroll('pricing-preview')">Pricing</a>
+    <a href="#" onclick="smoothScroll('contact')">Contact</a>
+  </div>
+  <div class="footer-legal">
+    JUSTHEN CO., LTD. / 株式会社ジャッセン | 古物商許可証 第305581606050号 東京都公安委員会 代表者：林祐樹<br>
+    税関輸出入者コード 10000NKS0000 | 三井住友銀行 光ヶ丘支店288 普通-1054339 カ)ジャッセン<br>
+    © 2025 JUSTHEN Co., Ltd. All rights reserved. All exports comply with Japanese laws and destination regulations.
+  </div>
+</footer>
+
+<!-- AI CHAT WIDGET -->
+<button id="chat-btn" onclick="toggleChat()" title="Chat with YUKIMICHI AI">
+  🤖
+  <div class="chat-pulse"></div>
+</button>
+
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">⛩</div>
+    <div class="chat-header-info">
+      <strong>YUKIMICHI AI Assistant</strong>
+      <span>Japan Export Specialist · 雪道AIアシスタント</span>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg bot">
+      <div class="msg-bubble">
+        Hello! I'm the YUKIMICHI AI assistant. I can help you with Japan export inquiries, product availability, pricing, and shipping options.<br><br>
+        こんにちは！YUKIMICHI AIアシスタントです。輸出のご相談、商品の取扱可否、料金、配送方法などについてご案内できます。<br><br>
+        You can also ask in <strong>Chinese (中文)</strong> or <strong>Spanish (Español)</strong>! 🌏
+      </div>
+      <div class="msg-time">YUKIMICHI AI</div>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <textarea id="chat-input" placeholder="Ask about Japan export... / 輸出についてご質問を..." onkeydown="chatKeyDown(event)"></textarea>
+    <button id="chat-send" onclick="sendChat()">➤</button>
+  </div>
+  <div class="chat-lang-note">Responds in EN / 日本語 / 中文 / Español</div>
+</div>
+
+<script>
+  // ── SMOOTH SCROLL ──
+  function smoothScroll(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return false;
+  }
+
+  // ── QUOTE CALCULATOR ──
+  const shippingRates = {
+    express: { rate: 0.15, minFee: 10000, baseShip: { us: 3500, eu: 4200, sea: 2800, me: 4500, au: 3800, other: 4000 } },
+    air:     { rate: 0.10, minFee: 30000, baseShip: { us: 15000, eu: 18000, sea: 12000, me: 20000, au: 16000, other: 17000 } },
+    fcl:     { rate: 0.07, minFee: 50000, baseShip: { us: 80000, eu: 95000, sea: 50000, me: 100000, au: 85000, other: 90000 } },
+    lcl:     { rate: 0.07, minFee: 30000, baseShip: { us: 25000, eu: 30000, sea: 18000, me: 35000, au: 28000, other: 27000 } }
+  };
+
+  function calcQuote() {
+    const method = document.getElementById('calc-method').value;
+    const region = document.getElementById('calc-region').value;
+    const value = parseFloat(document.getElementById('calc-value').value) || 0;
+    const weight = parseFloat(document.getElementById('calc-weight').value) || 0;
+    const insurance = document.getElementById('calc-insurance').value;
+    const firstMonth = document.getElementById('calc-first').value;
+    const result = document.getElementById('calc-result');
+
+    if (!method || !region || value <= 0) { result.classList.remove('show'); return; }
+
+    const cfg = shippingRates[method];
+    const rawFee = value * cfg.rate;
+    const handlingFee = firstMonth === 'yes' ? 0 : Math.max(rawFee, cfg.minFee);
+    const baseShip = cfg.baseShip[region] || cfg.baseShip['other'];
+    const shipEst = baseShip + (weight * 500);
+    const insAmt = insurance === 'yes' ? Math.ceil(value * 0.005) : 0;
+    const total = value + handlingFee + shipEst + insAmt;
+
+    const fmt = n => '¥' + Math.round(n).toLocaleString('ja-JP');
+    document.getElementById('r-product').textContent = fmt(value);
+    document.getElementById('r-fee').textContent = firstMonth === 'yes' ? '¥0 (FREE / 無料)' : fmt(handlingFee);
+    document.getElementById('r-ship').textContent = fmt(shipEst) + ' (est.)';
+    document.getElementById('r-ins').textContent = insurance === 'yes' ? fmt(insAmt) + ' (~0.5%)' : '¥0 (none)';
+    document.getElementById('r-total').textContent = fmt(total) + ' (est.)';
+    result.classList.add('show');
+  }
+
+  // ── CONTACT FORM ──
+  function submitContact(e) {
+    e.preventDefault();
+    document.getElementById('contact-success').classList.add('show');
+    e.target.reset();
+    setTimeout(() => document.getElementById('contact-success').classList.remove('show'), 6000);
+  }
+
+  // ── AI CHAT ──
+  let chatOpen = false;
+  let chatHistory = [];
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chat-window').classList.toggle('open', chatOpen);
+    if (chatOpen) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+  }
+
+  function openChat() {
+    chatOpen = false; toggleChat();
+  }
+
+  function chatKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+  }
+
+  function addMsg(role, text) {
+    const messages = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+    const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+    div.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    return div;
+  }
+
+  function addTyping() {
+    const messages = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'msg bot'; div.id = 'typing-indicator';
+    div.innerHTML = `<div class="msg-bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  async function sendChat() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    addMsg('user', text);
+    chatHistory.push({ role: 'user', content: text });
+    addTyping();
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory })
+      });
+      const data = await res.json();
+      removeTyping();
+
+      if (data.message) {
+        chatHistory.push({ role: 'assistant', content: data.message });
+        addMsg('bot', data.message);
+      } else {
+        addMsg('bot', 'Sorry, I encountered an error. Please try again or contact us directly.\n申し訳ありません。エラーが発生しました。直接お問い合わせください。');
+      }
+    } catch (err) {
+      removeTyping();
+      addMsg('bot', 'Connection error. Please check your internet or contact us directly.\n接続エラーです。直接お問い合わせください。');
+    }
+  }
+</script>
+</body>
+</html>
